@@ -9,6 +9,7 @@
 - Download the python script [here](PythonParrot.py)
 - Install python keyboard module with `pip3 install keyboard`
 - Install python camera  module with `pip3 install opencv-python`(might not use in final product and doesn't do anything too special as of yet)
+- The `speed` integer sets the speed for piloting commands in a range of 0 to 100 in the python script
 ## How to use
 - open a terminal window in the folder of the python script or navigate to it
 - run `sudo -s` for sudo privelges as the keyboard module needs this
