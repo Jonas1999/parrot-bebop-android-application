@@ -29,7 +29,7 @@ while(done == False):#numlock needs to be on
         done = True
     elif text == 'r':
         drone.start_video_streaming("live","DefaultVideo")
-    elif text == 't':
+    elif text == 'o':
         drone.stop_video_streaming()
     elif text == 'c':
         cam = cv.VideoCapture(0)
