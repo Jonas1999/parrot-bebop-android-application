@@ -12,7 +12,7 @@
 - The `speed` integer sets the speed for piloting commands in a range of 0 to 100 in the python script
 ## How to use
 - open a terminal window in the folder of the python script or navigate to it
-- run `sudo -s` for sudo privelges as the keyboard module needs this
+- run `sudo -s` for sudo privileges as the keyboard module needs this
 - run `source ~/code/parrot-groundsdk/./products/olympe/linux/env/shell` to initiate the olympe shell
 - execute the python script with `python3 PythonParrot.py`
 ## Controls
@@ -25,7 +25,7 @@
 - `Y` video stream function(might remove and/or doesn't work properly yet)
 - `P` start piloting mode
   - `8` go forwards
-  - `2` go backwards
+  - `2` go backwardsprivileges
   - `4` go left
   - `6` go right
   - `7` turn left
