@@ -1,20 +1,20 @@
 # python-parrot
-##Requirements
+## Requirements
 - Ubuntu or Debian based linux distribution
 - Wifi card/adapter
 - Python 3.7 or newer recommended
 - parrot bebop2 drone or anafi4k
-##Setup
+## Setup
 - Install olympe shell through the  guide here: https://developer.parrot.com/docs/olympe/
 - Download the python script [here](PythonParrot.py)
 - Install python keyboard module with 'pip3 install keyboard'
 - Install python camera  module with 'pip3 install opencv-python'(might not use in final product and doesn't do anything too special as of yet)
-##How to use
+## How to use
 - open a terminal window in the folder of the python script or navigate to it
 - run 'sudo -s' for sudo privelges as the keyboard module needs this
 - run 'source ~/code/parrot-groundsdk/./products/olympe/linux/env/shell' to initiate the olympe shell
 - execute the python script with 'python3 PythonParrot.py'
-##Controls
+## Controls
 - 'T' take off
 - 'L' landing
 - 'Q' quit
