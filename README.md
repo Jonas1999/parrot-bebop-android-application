@@ -25,7 +25,7 @@
 - `Y` video stream function(might remove and/or doesn't work properly yet)
 - `P` start piloting mode
   - `8` go forwards
-  - `2` go backwardsprivileges
+  - `2` go backwards
   - `4` go left
   - `6` go right
   - `7` turn left
