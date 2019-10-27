@@ -19,10 +19,6 @@
 - `T` take off
 - `L` landing
 - `Q` quit
-- `R` start video stream(might remove and/or doesn't work properly yet)
-- `O` stop video stream(might remove and/or doesn't work properly yet)
-- `C` video capture(might remove and/or doesn't work properly yet)
-- `Y` video stream function(might remove and/or doesn't work properly yet)
 - `P` start piloting mode
   - `8` go forwards
   - `2` go backwards
@@ -32,4 +28,6 @@
   - `9` turn right
   - `1` go down
   - `3` go up
-  - `Q` exit piloting mode
+  - `R` toggle recording mode, will make a file called recordedpath.txt in the python scripts folder
+  - `L` toggle replay mode
+  - `E` exit piloting mode
