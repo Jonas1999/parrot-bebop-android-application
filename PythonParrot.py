@@ -1,6 +1,7 @@
 import keyboard
 import olympe
 import time
+from time import perf_counter
 from olympe.messages.ardrone3.Piloting import TakeOff, Landing
 
 text = "stuff"
@@ -34,13 +35,22 @@ while(done == False):#numlock needs to be on
         drone.start_piloting()
         piloting = True
         while(piloting == True):
-            if cMode == False:
+            if recording == True:
+                stime = perf_counter()
+            if cMode == False:#regular input
                 text = keyboard.read_key()
-            elif cMode == True:
-                print("load mode here")
+            elif cMode == True:#playback
+                time.sleep(rtime)
+                if rewind[recCurrent] == ">":
+                    temp = ""
+                    recCurrent += 1
+                    while rewind[recCurrent] != "<":
+                        temp += rewind[recCurrent]
+                        recCurrent += 1
+                    rtime = float(temp)
                 text = rewind[recCurrent]
                 recCurrent += 1
-                if recCurrent == len(rewind):
+                if recCurrent == len(rewind) or recCurrent > len(rewind):
                     cMode = False
             if text == "8":#numpad 8
                 print("forward movement")
@@ -49,7 +59,7 @@ while(done == False):#numlock needs to be on
                     rec.write(text)
             elif text == "2":#numpad 2
                 print("backward movement")
-                drone.piloting_pcmd(0, nspeed, 0, 0, duration)#.wait()
+                drone.piloting_pcmd(0, nspeed, 0, 0, duration)
                 if(recording == True):
                     rec.write(text)
             elif text == "4":#numpad 4
@@ -96,11 +106,11 @@ while(done == False):#numlock needs to be on
                     recording = True
                     rec = open("recordedpath.txt", "w+")
                     print("recording on")
+                    stime = perf_counter()
                 elif recording == True:
                     recording = False
                     rec.close()
                     print("recording off")
-
             elif text == 'l':
                 if recording == True:
                     rec.close()
@@ -109,11 +119,13 @@ while(done == False):#numlock needs to be on
                 rewind = list(rec.read())
                 recCurrent = 0
                 cMode = True
-                
+                rtime = 0
             elif text == 'e':
                 print("quitting pilot mode")
                 drone.stop_piloting()
                 piloting = False
             time.sleep(duration)
-
+            if recording == True:
+                etime = perf_counter()
+                rec.write(">" + str(etime - stime - duration) + "<")
 drone.disconnection()
