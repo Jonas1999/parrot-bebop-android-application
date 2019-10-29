@@ -1,14 +1,17 @@
 import keyboard
 import olympe
+import sys
 import time
+import os.path
 from time import perf_counter
 from olympe.messages.ardrone3.Piloting import TakeOff, Landing
+from termios import tcflush, TCIFLUSH
 
 text = "stuff"
 done = False#for main while loop
 piloting = False#for piloting while loop
 duration = 0.1
-speed = 50
+speed = 100
 nspeed = speed - speed - speed
 cMode = False#regular input or replay
 recording = False
@@ -21,7 +24,12 @@ drone.connection()
 # olympe.Drone.get_state(): get the current drone state
 
 while(done == False):#numlock needs to be on
+    tcflush(sys.stdin, TCIFLUSH)#flush input buffer
     text = keyboard.read_key()
+    if text == 'c':#for reconnection
+        #drone = olympe.Drone("192.168.42.1")#real bebop2 drone
+        drone = olympe.Drone("10.202.0.1")#simulated anafi4k drone
+        drone.connection()
     if text == 't':
         print("takeoff function")
         drone(TakeOff()).wait()
@@ -39,6 +47,7 @@ while(done == False):#numlock needs to be on
                 stime = perf_counter()
             if cMode == False:#regular input
                 text = keyboard.read_key()
+                tcflush(sys.stdin, TCIFLUSH)#flush input buffer
             elif cMode == True:#playback
                 time.sleep(rtime)
                 if rewind[recCurrent] == ">":
@@ -98,9 +107,24 @@ while(done == False):#numlock needs to be on
                 if(recording == True):
                     rec.write(text)
             elif text == 'c':
-                stoi:speed = input
+                temp = input()
+                if temp[0] == 'c':
+                    temp = temp[1:]
+                if temp.isdigit() == True:
+                    speed = int(temp)
+                    nspeed = speed - speed - speed
+                else:
+                    print("faulty input")
+                print("the current speed is: " + str(speed))
             elif text == 'd':
-                stoi:duration = input
+                temp = input()
+                if temp[0] == 'd':
+                    temp = temp[1:]
+                if type(duration == float):
+                    duration = float(temp)
+                else:
+                    print("faulty input")
+                print("the current duration is: " + str(duration))
             elif text == 'r':
                 if recording == False:
                     recording = True
@@ -115,11 +139,14 @@ while(done == False):#numlock needs to be on
                 if recording == True:
                     rec.close()
                     recording = False
-                rec = open("recordedpath.txt", "r")
-                rewind = list(rec.read())
-                recCurrent = 0
-                cMode = True
-                rtime = 0
+                if os.path.isfile("recordedpath.txt") == True:
+                    rec = open("recordedpath.txt", "r")
+                    rewind = list(rec.read())
+                    recCurrent = 0
+                    cMode = True
+                    rtime = 0
+                elif os.path.isfile("recordedpath.txt") == False:
+                    print("no recorded path found")
             elif text == 'e':
                 print("quitting pilot mode")
                 drone.stop_piloting()
@@ -129,3 +156,4 @@ while(done == False):#numlock needs to be on
                 etime = perf_counter()
                 rec.write(">" + str(etime - stime - duration) + "<")
 drone.disconnection()
+tcflush(sys.stdin, TCIFLUSH)#flush input buffer
