@@ -16,6 +16,8 @@
 - run `source ~/code/parrot-groundsdk/./products/olympe/linux/env/shell` to initiate the olympe shell
 - execute the python script with `python3 PythonParrot.py`
 ## Controls
+Most of the keyboard controls don't need to be activated while in the window actively as it's listening to the keyboard input directly. Only keyboard mappings marked with an "\*" needs to be used actively in the terminal window. 
+- `C` reconnecting to drone if initial connection fails
 - `T` take off
 - `L` landing
 - `Q` quit
@@ -30,4 +32,6 @@
   - `3` go up
   - `R` toggle recording mode, will make a file called recordedpath.txt in the python scripts folder
   - `L` toggle replay mode
+  - \*`C` change speed of piloting commands(input a range between `0` and `100`)
+  - \*`D` change duration of piloting commands(input a range between `0` and Float max, when duration is set to `0` the command)
   - `E` exit piloting mode
